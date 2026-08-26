@@ -1,0 +1,1872 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>My Mind ❤️</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --pink:#ff4f9a;
+    --purple:#9b6cff;
+    --blue:#56b8ff;
+    --cyan:#58f5ff;
+    --white:#edf3ff;
+    --muted:#7d8aa1;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+
+    background:#02030a;
+
+    color:var(--white);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    overflow:hidden;
+
+}
+
+
+/* =========================
+   MAIN APP
+========================= */
+
+.app{
+
+    position:relative;
+
+    width:100vw;
+
+    height:100vh;
+
+    min-height:600px;
+
+    overflow:hidden;
+
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.app::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(120,80,255,.16),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,70,150,.12),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(50,180,255,.10),
+            transparent 25%
+        );
+
+    pointer-events:none;
+
+}
+
+
+/* scan lines */
+
+.app::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:100;
+
+    pointer-events:none;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.018) 0px,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+}
+
+
+/* =========================
+   START SCREEN
+========================= */
+
+.start{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:50;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:25px;
+
+    background:
+        radial-gradient(
+            circle,
+            #15152f,
+            #050611 55%,
+            #02030a
+        );
+
+    transition:
+        opacity 1s,
+        transform 1s;
+
+}
+
+
+.start.hide{
+
+    opacity:0;
+
+    transform:scale(1.12);
+
+    pointer-events:none;
+
+}
+
+
+.start-content{
+
+    width:100%;
+
+    max-width:700px;
+
+}
+
+
+.brain{
+
+    width:90px;
+
+    height:90px;
+
+    margin:
+        0 auto 25px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(155,108,255,.08);
+
+    border:
+        1px solid
+        rgba(155,108,255,.5);
+
+    box-shadow:
+        0 0 55px
+        rgba(155,108,255,.25);
+
+    font-size:40px;
+
+    animation:
+        float 3s ease-in-out infinite;
+
+}
+
+
+.access{
+
+    color:var(--cyan);
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    margin-bottom:18px;
+
+}
+
+
+.start h1{
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-weight:normal;
+
+    font-size:
+        clamp(45px,9vw,85px);
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--purple),
+            var(--blue)
+        );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+.start p{
+
+    margin-top:20px;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.9;
+
+}
+
+
+.enter{
+
+    margin-top:30px;
+
+    padding:15px 30px;
+
+    background:
+        rgba(255,79,154,.06);
+
+    color:#ffb6d4;
+
+    border:
+        1px solid
+        rgba(255,79,154,.6);
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.enter:hover{
+
+    background:
+        rgba(255,79,154,.14);
+
+    box-shadow:
+        0 0 30px
+        rgba(255,79,154,.2);
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:40;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#02030a;
+
+    padding:25px;
+
+}
+
+
+.loader{
+
+    width:100%;
+
+    max-width:600px;
+
+}
+
+
+.loader-title{
+
+    color:var(--cyan);
+
+    font-size:11px;
+
+    margin-bottom:18px;
+
+}
+
+
+.loader-bar{
+
+    width:100%;
+
+    height:4px;
+
+    background:#101728;
+
+}
+
+
+.loader-fill{
+
+    width:0%;
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--purple),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(86,184,255,.6);
+
+}
+
+
+.loader-text{
+
+    margin-top:14px;
+
+    color:#65718a;
+
+    font-size:10px;
+
+}
+
+
+/* =========================
+   MIND
+========================= */
+
+.mind{
+
+    position:absolute;
+
+    inset:0;
+
+    display:none;
+
+    opacity:0;
+
+    transition:
+        opacity 1.5s;
+
+}
+
+
+/* =========================
+   STARS
+========================= */
+
+.star{
+
+    position:absolute;
+
+    width:3px;
+
+    height:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    opacity:.35;
+
+    animation:
+        twinkle 3s infinite;
+
+}
+
+
+/* =========================
+   HUD
+========================= */
+
+.hud{
+
+    position:absolute;
+
+    top:18px;
+
+    left:20px;
+
+    right:20px;
+
+    z-index:5;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#56647c;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+
+}
+
+
+.hud .pink{
+
+    color:var(--pink);
+
+}
+
+
+/* =========================
+   CENTER CORE
+========================= */
+
+.core{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    width:210px;
+
+    height:210px;
+
+    transform:
+        translate(-50%,-50%);
+
+}
+
+
+.core-glow{
+
+    position:absolute;
+
+    inset:-30px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,79,154,.25),
+            rgba(155,108,255,.14),
+            transparent 70%
+        );
+
+    filter:blur(15px);
+
+    animation:
+        pulse 3s infinite;
+
+}
+
+
+.core-circle{
+
+    position:absolute;
+
+    inset:32px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #3b2452,
+            #11152e 55%,
+            #060813
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    box-shadow:
+        inset 0 0 35px
+            rgba(255,79,154,.25),
+
+        0 0 60px
+            rgba(155,108,255,.2);
+
+}
+
+
+.core-text{
+
+    font-family:Georgia,serif;
+
+    font-size:21px;
+
+    line-height:1.4;
+
+}
+
+
+.core-text small{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:var(--cyan);
+
+    font-family:
+        "Courier New";
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+}
+
+
+/* =========================
+   ORBITS
+========================= */
+
+.orbit{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(155,108,255,.22);
+
+}
+
+
+.orbit1{
+
+    width:290px;
+
+    height:130px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(25deg);
+
+    animation:
+        spin1 8s linear infinite;
+
+}
+
+
+.orbit2{
+
+    width:390px;
+
+    height:170px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-35deg);
+
+    animation:
+        spin2 12s linear infinite;
+
+}
+
+
+.orbit3{
+
+    width:500px;
+
+    height:210px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(65deg);
+
+    animation:
+        spin1 17s linear infinite;
+
+}
+
+
+/* =========================
+   THOUGHT BOXES
+========================= */
+
+.thought{
+
+    position:absolute;
+
+    padding:9px 14px;
+
+    border-radius:30px;
+
+    background:
+        rgba(9,12,26,.75);
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    backdrop-filter:blur(8px);
+
+    color:#8e9bb0;
+
+    font-size:10px;
+
+    white-space:nowrap;
+
+    animation:
+        floatThought 4s ease-in-out infinite;
+
+}
+
+
+/* NORMAL THOUGHTS */
+
+.thought.a{
+    top:17%;
+    left:9%;
+}
+
+.thought.b{
+    top:18%;
+    right:9%;
+}
+
+.thought.c{
+    bottom:18%;
+    left:8%;
+}
+
+.thought.d{
+    bottom:17%;
+    right:8%;
+}
+
+
+/* =========================
+   YOU
+========================= */
+
+.you{
+
+    position:absolute;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    color:#ffd1e2;
+
+    background:
+        rgba(255,79,154,.08);
+
+    border:
+        1px solid
+        rgba(255,79,154,.5);
+
+    box-shadow:
+        0 0 25px
+        rgba(255,79,154,.15);
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:17px;
+
+    opacity:0;
+
+    animation:
+        appearYou 1s forwards,
+        floatYou 4s ease-in-out infinite;
+
+}
+
+
+/*
+   FIXED RESPONSIVE
+   POSITIONS
+*/
+
+.you1{
+    top:28%;
+    left:20%;
+    animation-delay:3s,4s;
+}
+
+.you2{
+    top:27%;
+    right:20%;
+    animation-delay:5s,6s;
+}
+
+.you3{
+    bottom:27%;
+    left:20%;
+    animation-delay:7s,8s;
+}
+
+.you4{
+    bottom:26%;
+    right:20%;
+    animation-delay:9s,10s;
+}
+
+.you5{
+    top:13%;
+    left:50%;
+    transform:translateX(-50%);
+    animation-delay:11s,12s;
+}
+
+.you6{
+    bottom:11%;
+    left:50%;
+    transform:translateX(-50%);
+    animation-delay:13s,14s;
+}
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+/* =========================
+   FINAL SCREEN — FIXED
+========================= */
+
+.final {
+    position: absolute;
+    inset: 0;
+    z-index: 70;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(29,16,45,.98),
+            rgba(2,3,10,.99) 75%
+        );
+}
+
+
+.final-content {
+
+    width: min(92%, 650px);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 35px 28px;
+
+    border: 1px solid
+        rgba(255,255,255,.12);
+
+    border-radius: 24px;
+
+    background:
+        rgba(10,12,27,.88);
+
+    backdrop-filter:
+        blur(15px);
+
+    box-shadow:
+        0 0 60px
+        rgba(155,108,255,.15);
+
+    text-align: center;
+
+    animation:
+        finalAppear 1.2s ease;
+}
+
+
+/* hide scrollbar but keep scrolling */
+
+.final-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.final-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.final-content::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.15);
+    border-radius: 10px;
+}
+
+
+.final-label {
+
+    color: #ff4f9a;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 12px;
+}
+
+
+.final h2 {
+
+    font-family: Georgia, serif;
+
+    font-weight: normal;
+
+    font-size:
+        clamp(32px, 8vw, 65px);
+
+    margin-bottom: 5px;
+}
+
+
+.final-you {
+
+    margin: 5px 0 18px;
+
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(50px, 12vw, 90px);
+
+    line-height: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff8eb8,
+            #c3a2ff,
+            #8ddfff
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        heartbeat 1.5s infinite;
+}
+
+
+.final-message {
+
+    font-family: Georgia, serif;
+
+    color: #aab5c6;
+
+    font-size:
+        clamp(13px, 3.5vw, 17px);
+
+    line-height: 1.75;
+}
+
+
+.final-message strong {
+
+    color: #ffb3cf;
+
+}
+
+
+/* =========================
+   PHONE FIX
+========================= */
+
+@media (max-width: 600px) {
+
+    .final {
+
+        align-items: center;
+
+        padding: 15px;
+
+    }
+
+
+    .final-content {
+
+        width: 100%;
+
+        max-height: 88vh;
+
+        padding:
+            25px 18px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .final-label {
+
+        font-size: 8px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .final h2 {
+
+        font-size: 34px;
+
+    }
+
+
+    .final-you {
+
+        font-size: 62px;
+
+        margin:
+            8px 0 18px;
+
+    }
+
+
+    .final-message {
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+    }
+
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+}
+
+
+@keyframes twinkle{
+
+    0%,100%{
+        opacity:.15;
+    }
+
+    50%{
+        opacity:.8;
+    }
+
+}
+
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(.9);
+    }
+
+    50%{
+        transform:scale(1.12);
+    }
+
+}
+
+
+@keyframes spin1{
+
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(25deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(385deg);
+    }
+
+}
+
+
+@keyframes spin2{
+
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(-35deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(-395deg);
+    }
+
+}
+
+
+@keyframes floatThought{
+
+    0%,100%{
+        margin-top:0;
+    }
+
+    50%{
+        margin-top:-10px;
+    }
+
+}
+
+
+@keyframes appearYou{
+
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+
+@keyframes floatYou{
+
+    0%,100%{
+        margin-top:0;
+    }
+
+    50%{
+        margin-top:-8px;
+    }
+
+}
+
+
+@keyframes heartbeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+}
+
+
+@keyframes finalAppear{
+
+    from{
+        opacity:0;
+        transform:scale(.88);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================
+   MOBILE FIX
+========================= */
+
+@media(max-width:600px){
+
+    .app{
+        min-height:100vh;
+    }
+
+
+    .hud{
+
+        font-size:7px;
+
+    }
+
+
+    .core{
+
+        width:170px;
+
+        height:170px;
+
+    }
+
+
+    .core-circle{
+
+        inset:27px;
+
+    }
+
+
+    .core-text{
+
+        font-size:17px;
+
+    }
+
+
+    .orbit1{
+
+        width:240px;
+
+        height:110px;
+
+    }
+
+
+    .orbit2{
+
+        width:310px;
+
+        height:140px;
+
+    }
+
+
+    .orbit3{
+
+        width:390px;
+
+        height:170px;
+
+    }
+
+
+    .thought{
+
+        font-size:7px;
+
+        padding:
+            7px 9px;
+
+    }
+
+
+    .thought.a{
+        top:12%;
+        left:4%;
+    }
+
+
+    .thought.b{
+        top:12%;
+        right:4%;
+    }
+
+
+    .thought.c{
+        bottom:13%;
+        left:4%;
+    }
+
+
+    .thought.d{
+        bottom:13%;
+        right:4%;
+    }
+
+
+    .you{
+
+        font-size:14px;
+
+        padding:
+            8px 13px;
+
+    }
+
+
+    .you1{
+        top:27%;
+        left:7%;
+    }
+
+
+    .you2{
+        top:27%;
+        right:7%;
+    }
+
+
+    .you3{
+        bottom:27%;
+        left:7%;
+    }
+
+
+    .you4{
+        bottom:27%;
+        right:7%;
+    }
+
+
+    .you5{
+
+        top:15%;
+
+    }
+
+
+    .you6{
+
+        bottom:15%;
+
+    }
+
+
+    .final{
+
+        align-items:flex-start;
+
+        padding-top:70px;
+
+    }
+
+
+    .final-content{
+
+        padding-bottom:60px;
+
+    }
+
+
+    .final h2{
+
+        font-size:38px;
+
+    }
+
+
+    .final-you{
+
+        font-size:65px;
+
+        margin:
+            10px 0 20px;
+
+    }
+
+
+    .final-message{
+
+        font-size:15px;
+
+        line-height:1.8;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =========================
+     START
+========================= -->
+
+<section
+id="start"
+class="start"
+>
+
+<div class="start-content">
+
+
+<div class="brain">
+🧠
+</div>
+
+
+<div class="access">
+PRIVATE ACCESS // THOUGHTS.EXE
+</div>
+
+
+<h1>
+My Mind
+</h1>
+
+
+<p>
+
+You wanted to know
+what's going on in my head...
+
+<br><br>
+
+Fine.
+
+<br>
+
+You can look.
+
+<br><br>
+
+But don't blame me
+for what you find. 👀
+
+</p>
+
+
+<button
+class="enter"
+onclick="startScan()"
+>
+
+ENTER MY MIND →
+
+</button>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     LOADING
+========================= -->
+
+<section
+id="loading"
+class="loading"
+>
+
+<div class="loader">
+
+
+<div class="loader-title">
+
+> THOUGHT_ACCESS.exe
+
+</div>
+
+
+<div class="loader-bar">
+
+<div
+id="loaderFill"
+class="loader-fill"
+></div>
+
+</div>
+
+
+<div
+id="loaderText"
+class="loader-text"
+>
+
+Connecting...
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     MIND
+========================= -->
+
+<section
+id="mind"
+class="mind"
+>
+
+
+<div class="hud">
+
+<div>
+THOUGHT_SPACE://CONNECTED
+</div>
+
+<div>
+SUBJECT:
+<span class="pink">
+YOU
+</span>
+</div>
+
+</div>
+
+
+<!-- STARS -->
+
+<div
+class="star"
+style="top:10%;left:18%"
+></div>
+
+<div
+class="star"
+style="top:25%;left:75%"
+></div>
+
+<div
+class="star"
+style="top:75%;left:20%"
+></div>
+
+<div
+class="star"
+style="top:80%;right:18%"
+></div>
+
+<div
+class="star"
+style="top:40%;right:8%"
+></div>
+
+<div
+class="star"
+style="top:13%;right:40%"
+></div>
+
+
+<!-- NORMAL THOUGHTS -->
+
+<div class="thought a">
+random memories with YOU...
+</div>
+
+<div class="thought b">
+things I remember about YOU...
+</div>
+
+<div class="thought c">
+little moments with YOU...
+</div>
+
+<div class="thought d">
+things that make me smile like YOU...
+</div>
+
+
+<!-- YOU -->
+
+<div class="you you1">
+you.
+</div>
+
+<div class="you you2">
+you.
+</div>
+
+<div class="you you3">
+you.
+</div>
+
+<div class="you you4">
+you.
+</div>
+
+<div class="you you5">
+you.
+</div>
+
+<div class="you you6">
+you.
+</div>
+
+
+<!-- CORE -->
+
+<div class="core">
+
+<div class="core-glow"></div>
+
+
+<div class="orbit orbit1"></div>
+
+<div class="orbit orbit2"></div>
+
+<div class="orbit orbit3"></div>
+
+
+<div class="core-circle">
+
+<div class="core-text">
+
+what's<br>
+on my mind?
+
+<small>
+SCANNING...
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================
+     FINAL
+========================= -->
+
+<section
+id="final"
+class="final"
+>
+
+<div class="final-content">
+
+
+<div class="final-label">
+
+THOUGHT SCAN // COMPLETE
+
+</div>
+
+
+<h2>
+
+I LOOKED.
+
+</h2>
+
+
+<div class="final-you">
+
+YOU.
+
+</div>
+
+
+<div class="final-message">
+
+I told you to enter my thoughts
+and look around.
+
+<br><br>
+
+So I did the scan too.
+
+<br><br>
+
+And somehow...
+
+<br>
+
+every path,
+
+every memory,
+
+every little corner...
+
+<br><br>
+
+keeps leading back to
+<strong>you.</strong>
+
+<br><br>
+
+So yeah...
+
+<br>
+
+you weren't just
+somewhere in my thoughts.
+
+<br><br>
+
+<strong>
+You were basically everywhere.
+</strong>
+
+<br><br>
+
+And now you know. 😭❤️
+
+</div>
+
+
+</div>
+
+</section>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   START
+========================= */
+
+function startScan(){
+
+    document
+        .getElementById("start")
+        .classList.add("hide");
+
+
+    setTimeout(()=>{
+
+        document
+            .getElementById("loading")
+            .style.display="flex";
+
+
+        runLoader();
+
+    },700);
+
+}
+
+
+/* =========================
+   LOADER
+========================= */
+
+function runLoader(){
+
+    let progress=0;
+
+    const fill =
+        document
+        .getElementById("loaderFill");
+
+    const text =
+        document
+        .getElementById("loaderText");
+
+
+    const messages=[
+
+        "Connecting to memory...",
+
+        "Entering thought sector...",
+
+        "Scanning recent thoughts...",
+
+        "Analyzing recurring subjects...",
+
+        "Unexpected pattern detected...",
+
+        "Searching again...",
+
+        "Result confirmed."
+
+    ];
+
+
+    let message=0;
+
+
+    const interval=setInterval(()=>{
+
+        progress+=2;
+
+        fill.style.width=
+            progress+"%";
+
+
+        if(
+            progress%14===0 &&
+            message<messages.length
+        ){
+
+            text.textContent=
+                messages[message];
+
+            message++;
+
+        }
+
+
+        if(progress>=100){
+
+            clearInterval(interval);
+
+            setTimeout(
+                openMind,
+                700
+            );
+
+        }
+
+    },40);
+
+}
+
+
+/* =========================
+   OPEN MIND
+========================= */
+
+function openMind(){
+
+    document
+        .getElementById("loading")
+        .style.display="none";
+
+
+    const mind =
+        document
+        .getElementById("mind");
+
+
+    mind.style.display="block";
+
+
+    setTimeout(()=>{
+
+        mind.style.opacity="1";
+
+    },100);
+
+
+    setTimeout(
+        showFinal,
+        16000
+    );
+
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+function showFinal(){
+
+    document
+        .getElementById("final")
+        .style.display="flex";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
